@@ -15,6 +15,7 @@ import {
 
 import { Button } from '../../components/Button';
 import { CardShop } from '../../components/CardShop';
+import { useNavigation } from '@react-navigation/native';
 
 const data = [
     {
@@ -51,6 +52,7 @@ const data = [
 export function Cart(){ 
 
     const theme = useTheme(); 
+    const {goBack} = useNavigation();
 
    return (
         <Container>
@@ -59,7 +61,9 @@ export function Cart(){
                 translucent
             />
             <Header>
-                <ButtonIcon>
+                <ButtonIcon onPress={()=>{
+                    goBack()}
+                }>
                     <Icon 
                         name="arrowleft" 
                         size={24} 

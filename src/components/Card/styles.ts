@@ -9,14 +9,14 @@ const widthScreen = Dimensions.get('window').width;
 const cardWidth = (widthScreen*60)/100;
 
 export const Container = styled.View`
-    flex:1;
     width: ${cardWidth}px;
     height: ${cardHeight}px;
     background-color: ${({theme})=> theme.colors.pinkCardOne};
     border-radius: 20px;
     justify-content: flex-end;
     align-items: center;
-    margin-right: 20px;
+    padding: 10px;
+    margin-right: 10px;
 `;
 
 export const CanImage = styled.Image`
