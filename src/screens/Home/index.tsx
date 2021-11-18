@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
+import api from '../../services/api';
 
 import {
     Container,
@@ -23,58 +24,41 @@ import GrapeSVg from '../../assets/grape.svg';
 import PearSVG from '../../assets/Pear.svg';
 import PineappleSVG from '../../assets/pineapple.svg';
 
-
-const flavors = [
-    {
-        id: 1,
-        name: 'Apple'
-    },
-    {
-        id: 2,
-        name: 'Cherry'
-    },
-    {
-        id: 3,
-        name: 'Coconut'
-    },
-    {
-        id: 4,
-        name: 'Grape'
-    },
-    {
-        id: 5,
-        name: 'Pear'
-    },
-    {
-        id: 6,
-        name: 'Pineapple'
-    },
-];
-
-const juices = [
-    {
-        id: 1,
-        name: 'Juice1',
-        price: '10,00',
-        image: 'https://media.cotabest.com.br/media/sku/suco-sabor-maca-verde-lata-269ml-liv-un.png',
-    },
-    {
-        id: 2,
-        name: 'Juice2',
-        price: '10,00',
-        image:'https://app-23495.nuvem-brasil-10.absamcloud.com/pessego%20n.png-1594172732260.png',
-    },
-    {
-        id: 3,
-        name: 'Juice3',
-        price: '10,00',
-        image: 'https://media.cotabest.com.br/media/sku/suco-sabor-grapefruit-lata-269ml-liv-un.png',
-    },
-]
-
 export function Home(){
 
+    const [juices, setJuices] = useState([]);
+    const [flavors, setFlavors] = useState([]);
     const theme = useTheme();
+
+    async function fechMostPopularJuices(){
+        try{
+            const response = await api.get('/juices?_page=1&_limit=3');
+            //console.log(response.data);
+            setJuices(response.data);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    async function fechJuices(id:string){
+        try{
+            const response = await api.get(`/juices?_page=${id}&_limit=1`);
+            //console.log(response.data);
+            setJuices(response.data);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    async function fechFlavors(){
+        try{
+            const response = await api.get('/flavors');
+            //console.log(response.data);
+            setFlavors(response.data);
+        }catch(e){
+            console.error(e);
+        }
+    }
 
     function getAccessoryIcon(type: string){
         switch(type){
@@ -94,6 +78,11 @@ export function Home(){
                 return AppleSVG;
         }
     }
+
+    useEffect(()=>{
+        fechFlavors();
+        fechMostPopularJuices();
+    },[]);
 
    return (
        <Background>
@@ -116,6 +105,7 @@ export function Home(){
                             name={item.name}
                             icon={getAccessoryIcon(item.name)} 
                             color={theme.colors.candyRed}
+                            onPress={()=>fechJuices(item.id)}
                         />}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}

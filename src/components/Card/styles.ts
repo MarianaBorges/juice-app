@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
+import { RectButton } from 'react-native-gesture-handler';
 
 const heigthScreen = Dimensions.get('window').height;
 const cardHeight = (heigthScreen*50)/100;
@@ -49,3 +50,5 @@ export const TextPrice = styled.Text`
 `;
 
 export const Icon = styled(Ionicons)``;
+
+export const ButtonIcon = styled(RectButton)``;

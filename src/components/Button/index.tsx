@@ -8,7 +8,7 @@ import {
 import { RectButtonProps } from 'react-native-gesture-handler';
 
 interface Props extends RectButtonProps{
-    total: string;
+    total: number;
 }
 
 export function Button({total}:Props){

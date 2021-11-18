@@ -5,13 +5,15 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "api": "json-server ./src/services/server.json --host 192.168.1.107 --port 3333 --delay 700"
   },
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.0",
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/material-bottom-tabs": "^6.0.9",
     "@react-navigation/native": "^6.0.6",
+    "axios": "^0.24.0",
     "expo": "~42.0.1",
     "expo-app-loading": "^1.1.2",
     "expo-font": "~9.2.1",

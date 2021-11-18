@@ -9,6 +9,7 @@ import {
 } from '@expo-google-fonts/poppins'
 
 import { ThemeProvider } from 'styled-components/native';
+import { CartProvider } from './src/context/cart';
 import theme from './src/global/styles/theme';
 
 import { Routes } from './src/routes';
@@ -25,8 +26,10 @@ export default function App() {
       return <AppLoading />
 
   return (
-    <ThemeProvider theme={theme}>
-      <Routes/>
-    </ThemeProvider>
+    <CartProvider>
+      <ThemeProvider theme={theme}>
+        <Routes/>
+      </ThemeProvider>
+    </CartProvider>
   );
 }

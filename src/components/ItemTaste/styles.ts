@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 interface Props{
    color: string;
 }
 
-export const Container = styled.View`
+export const Container = styled(RectButton)`
    margin-right: 15px;
 `;
 
@@ -32,7 +33,6 @@ export const FruitView = styled.View<Props>`
    border-width: 1px;
    background-color: ${({color})=>color};
    border-radius: 30px;
-
 `;
 
 export const Text = styled.Text`

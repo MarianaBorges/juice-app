@@ -54,3 +54,9 @@ export const Content = styled.View`
 export const CartList = styled(FlatList as new ()=> FlatList<JuiceProps>)`
     margin-bottom: 10px;
 `;
+
+export const Worning = styled.Text`
+    font-size: 16px;
+    font-family: ${({theme})=> theme.fonts.semiBold};
+    color: ${({theme})=> theme.colors.write};
+`;

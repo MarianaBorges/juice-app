@@ -17,9 +17,7 @@ export function Profile(){
                 translucent
             />
             <Container>
-
                 <Title>Profile</Title>
-                
             </Container>
         </Background>
  );

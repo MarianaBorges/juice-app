@@ -1,4 +1,6 @@
 import React from 'react';
+import { SvgProps } from 'react-native-svg';
+import { RectButtonProps } from 'react-native-gesture-handler';
 
 import {
    Container,
@@ -8,18 +10,15 @@ import {
    Text
 } from './styles';
 
-import AppleSVG from '../../assets/apple.svg';
-import { SvgProps } from 'react-native-svg';
-
-interface Props{
+interface Props extends RectButtonProps{
    color: string;
    name: string;
    icon: React.FC<SvgProps>;
 }
 
-export function ItemTaste({ name, color, icon : Icon }: Props){
+export function ItemTaste({ name, color, icon : Icon, ...rest }: Props){
    return (
-      <Container>
+      <Container {...rest}>
          <Content color={color}>
             <FruitView color={color}>
                <Icon 

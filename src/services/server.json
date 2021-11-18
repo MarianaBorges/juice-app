@@ -1,0 +1,101 @@
+{
+    "juices":[
+        {
+            "id": "1",
+            "image": "https://media.cotabest.com.br/media/sku/suco-sabor-maca-verde-lata-269ml-liv-un.png",
+            "name": "Juice One",
+            "details": "made with fruits and a lot of love",
+            "price": "9.50"
+        },
+        {
+            "id": "2",
+            "image": "https://app-23495.nuvem-brasil-10.absamcloud.com/pessego%20n.png-1594172732260.png",
+            "name": "Juice Two",
+            "details": "made with fruits and a lot of love",
+            "price": "9.50"
+        },
+        {
+            "id": "3",
+            "image": "https://media.cotabest.com.br/media/sku/suco-sabor-grapefruit-lata-269ml-liv-un.png",
+            "name": "Juice three",
+            "details": "made with fruits and a lot of love",
+            "price": "9.00"
+        },{
+            "id": "4",
+            "image": "https://media.cotabest.com.br/media/sku/suco-sabor-maca-verde-lata-269ml-liv-un.png",
+            "name": "Juice Four",
+            "details": "made with fruits and a lot of love",
+            "price": "9.0"
+        },
+        {
+            "id": "5",
+            "image": "https://app-23495.nuvem-brasil-10.absamcloud.com/pessego%20n.png-1594172732260.png",
+            "name": "Juice Five",
+            "details": "made with fruits and a lot of love",
+            "price": "9.10"
+        },
+        {
+            "id": "6",
+            "image": "https://media.cotabest.com.br/media/sku/suco-sabor-grapefruit-lata-269ml-liv-un.png",
+            "name": "Juice Sex",
+            "details": "made with fruits and a lot of love",
+            "price": "9.10"
+        },{
+            "id": "7",
+            "image": "https://media.cotabest.com.br/media/sku/suco-sabor-maca-verde-lata-269ml-liv-un.png",
+            "name": "Juice Seven",
+            "details": "made with fruits and a lot of love",
+            "price": "9.10"
+        },
+        {
+            "id": "8",
+            "image": "https://app-23495.nuvem-brasil-10.absamcloud.com/pessego%20n.png-1594172732260.png",
+            "name": "Juice Eight",
+            "details": "made with fruits and a lot of love",
+            "price": "9.10"
+        },
+        {
+            "id": "9",
+            "image": "https://media.cotabest.com.br/media/sku/suco-sabor-grapefruit-lata-269ml-liv-un.png",
+            "name": "Juice Nine",
+            "details": "made with fruits and a lot of love",
+            "price": "9.10"
+        }
+    ],
+    "flavors": [
+        {
+            "id": "1",
+            "name": "Apple"
+        },
+        {
+            "id": "2",
+            "name": "Cherry"
+        },
+        {
+            "id": "3",
+            "name": "Coconut"
+        },
+        {
+            "id": "4",
+            "name": "Grape"
+        },
+        {
+            "id": "5",
+            "name": "Pear"
+        },
+        {
+            "id": "6",
+            "name": "Pineapple"
+        }
+    ],
+    "user":[
+        {
+            "id":"1",
+            "name": "Maria da Silva",
+            "email": "mariasilva@gmail.com"
+        }
+    ],
+    "juices_cart":[
+
+    ]    
+}

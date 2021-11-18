@@ -2,15 +2,16 @@ import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 
 interface FlavorsProps{
-    id: number;
+    id: string;
     name: string;
 }
 
 interface JuiceProps{
-    id: number;
+    id: string;
     name: string;
-    price: string;
+    price: Number;
     image: string;
+    details: string;
 }
 
 export const Container = styled.View`
