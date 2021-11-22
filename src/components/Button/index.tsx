@@ -11,9 +11,9 @@ interface Props extends RectButtonProps{
     total: number;
 }
 
-export function Button({total}:Props){
+export function Button({total, ...rest}:Props){
    return (
-      <Container>
+      <Container {...rest}>
             <Price>${total}</Price>
             <Price>PAY</Price>
       </Container>

@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import api from '../../services/api';
+import { Alert, ActivityIndicator } from 'react-native';
 
 import {
     Container,
     Title,
     Header,
     Flavors,
-    Juices
+    Juices,
+    IndicatorContainer
 } from './styles';
 
 import { Background } from '../../components/Background'
@@ -26,37 +28,44 @@ import PineappleSVG from '../../assets/pineapple.svg';
 
 export function Home(){
 
+    const [isLoading, setIsLoading] = useState(false);
     const [juices, setJuices] = useState([]);
     const [flavors, setFlavors] = useState([]);
     const theme = useTheme();
 
     async function fechMostPopularJuices(){
         try{
+            setIsLoading(true);
             const response = await api.get('/juices?_page=1&_limit=3');
-            //console.log(response.data);
             setJuices(response.data);
         }catch(e){
             console.error(e);
+            Alert.alert("Ooops!","Ocorreu um problema!")
+        }finally{
+            setIsLoading(false);
         }
     }
 
     async function fechJuices(id:string){
         try{
             const response = await api.get(`/juices?_page=${id}&_limit=1`);
-            //console.log(response.data);
             setJuices(response.data);
         }catch(e){
             console.error(e);
+            Alert.alert("Ooops!","Ocorreu um problema!")
         }
     }
 
     async function fechFlavors(){
         try{
+            setIsLoading(true);
             const response = await api.get('/flavors');
-            //console.log(response.data);
             setFlavors(response.data);
         }catch(e){
             console.error(e);
+            Alert.alert("Ooops!","Ocorreu um problema!")
+        }finally{
+            setIsLoading(false);
         }
     }
 
@@ -90,37 +99,48 @@ export function Home(){
                 backgroundColor="transparent"
                 translucent
             />
-            <Container>
+            {
+                isLoading 
+                ?
+                    <IndicatorContainer>
+                        <ActivityIndicator 
+                            size="small" 
+                            color={theme.colors.write}
+                        />
+                    </IndicatorContainer>
+                :
+                <Container>
+                    <Header>
+                        <Logo/>
+                        <User source='https://i.pinimg.com/236x/65/ec/30/65ec30b84a0bcb0a64254396fd822cd0--eyes-hair.jpg'/>
+                    </Header>
+                    <Flavors
+                        data={flavors}
+                        keyExtractor={item => String(item.id)}
+                        renderItem={
+                            ({item})=><ItemTaste 
+                                    name={item.name}
+                                    icon={getAccessoryIcon(item.name)} 
+                                    color={theme.colors.candyRed}
+                                    onPress={()=>fechJuices(item.id)}
+                                />}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    />
 
-                <Header>
-                    <Logo/>
-                    <User source='https://i.pinimg.com/236x/65/ec/30/65ec30b84a0bcb0a64254396fd822cd0--eyes-hair.jpg'/>
-                </Header>
-
-            <Flavors
-                data={flavors}
-                keyExtractor={item => String(item.id)}
-                renderItem={
-                    ({item})=><ItemTaste 
-                            name={item.name}
-                            icon={getAccessoryIcon(item.name)} 
-                            color={theme.colors.candyRed}
-                            onPress={()=>fechJuices(item.id)}
-                        />}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-            />
-
-            <Title>Most Popular</Title>
-            <Juices
-                data={juices}
-                keyExtractor={item => String(item.id)}
-                renderItem={
-                    ({item}) => <Card data={item}/>}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false} 
-            />
-            </Container>
+                    <Title>Most Popular</Title>
+                    <Juices
+                        data={juices}
+                        keyExtractor={item => String(item.id)}
+                        renderItem={
+                            ({item}) => <Card data={item}/>}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false} 
+                    />
+                </Container>
+                
+            }
+            
         </Background>
- );
+    );
 }

@@ -19,12 +19,14 @@ interface Props{
         name: string;
         details: string;
         price: number;
+        priceTotal?:number;
+        quant?:number;
     }
 }
 
 export function CardShop({data}:Props){
 
-    const {plusJuices, juices} = useCart();
+    const {modifiesJuices} = useCart();
 
     function changeValue(price: number, quant: number){
        
@@ -37,7 +39,7 @@ export function CardShop({data}:Props){
             priceTotal: price,
             quant: quant
         }
-        plusJuices(newData);
+        modifiesJuices(newData);
     }
 
     return (
@@ -58,5 +60,5 @@ export function CardShop({data}:Props){
             />
           </JuiceDetails>
       </Container>
- );
+    );
 }

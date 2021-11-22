@@ -16,13 +16,14 @@ import { useTheme } from 'styled-components/native';
 
 interface Props{
     price: number;
+    quant?: number;
     onChange?: (price: number, quant: number)=>void;
 }
 
-export function QuantSelect({price, onChange=()=>{}}:Props){
+export function QuantSelect({price, quant = 1, onChange=()=>{}}:Props){
     
     const theme = useTheme();
-    const [counter, setCounter] = useState(1);
+    const [counter, setCounter] = useState(quant);
     const [priceTotal, setPriceTotal] = useState(price);
 
     function plusButton(){
@@ -36,7 +37,7 @@ export function QuantSelect({price, onChange=()=>{}}:Props){
             setPriceTotal(priceTotal-price);
             setCounter(counter - 1);
             onChange(priceTotal-price,counter-1);
-        }else{
+        }else if(counter<=0){
             setPriceTotal(0);
             setCounter(0);
             onChange(0,0);

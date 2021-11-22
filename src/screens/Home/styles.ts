@@ -9,7 +9,7 @@ interface FlavorsProps{
 interface JuiceProps{
     id: string;
     name: string;
-    price: Number;
+    price: number;
     image: string;
     details: string;
 }
@@ -43,4 +43,10 @@ export const Flavors = styled(FlatList as new ()=>FlatList<FlavorsProps>)`
 
 export const Juices = styled(FlatList as new ()=> FlatList<JuiceProps>)`
     padding-top: 20px;
+`;
+
+export const IndicatorContainer = styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
 `;

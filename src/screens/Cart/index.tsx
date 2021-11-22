@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{ useState, useEffect} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from 'styled-components/native';
@@ -16,15 +16,25 @@ import {
 
 import { Button } from '../../components/Button';
 import { CardShop } from '../../components/CardShop';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { useCart } from '../../context/cart';
+
+type RootBottomTabList = {
+    Home: undefined;
+}
+
+type HomeScreenNavigationProp = BottomTabNavigationProp<
+    RootBottomTabList,
+    'Home'
+>;
 
 export function Cart(){ 
 
     const theme = useTheme(); 
-    const { goBack } = useNavigation();
-    const { juices, total } = useCart();
-
+    const { goBack, navigate } = useNavigation<HomeScreenNavigationProp>();
+    const { juices, total, newRequestJuice } = useCart();
+   
    return (
         <Container>
             <StatusBar
@@ -60,7 +70,14 @@ export function Cart(){
                         <Worning>Seu carrinho está vazio!</Worning>
                 }
             
-                <Button total={Number(total)}/>
+                <Button 
+                    onPress={(()=>{
+                        newRequestJuice();
+                        navigate('Home');
+                    })
+                    }
+                    total={Number(total)}/>
+                
             </Content>
         </Container>
  );

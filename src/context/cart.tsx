@@ -5,6 +5,12 @@ import React, {
     useEffect
 } from 'react';
 
+import { Alert } from 'react-native';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
+
+import api from '../services/api';
+
 interface CartProviderProps{
     children: React.ReactNode;
 }
@@ -15,7 +21,7 @@ interface JuiceProps{
     name: string;
     details: string;
     price: number;
-    priceTotal:number;
+    priceTotal?:number;
     quant?: number; 
 }
 
@@ -30,7 +36,8 @@ interface CartContextData {
     juices: JuiceProps[];
     total: number;
     addNewJuice: (juice: JuiceProps)=> void;
-    plusJuices: (data: JuiceProps)=>void;
+    modifiesJuices: (data: JuiceProps)=>void;
+    newRequestJuice:()=>void;
 }
 
 const USER = {
@@ -47,22 +54,23 @@ function CartProvider ({children}:CartProviderProps){
     const [juices, setJuices] = useState<JuiceProps[]>([]);
     const [user, setUser] = useState(USER);
 
-
     function addNewJuice(juice: JuiceProps){
 
         const isJuice = juices.find( j => j.id === juice.id);
 
         if (!!isJuice){
-
-            const newJuice = {
-                id: isJuice.id,
-                image: isJuice.image,
-                name: isJuice.name,
-                details: isJuice.details,
-                price: isJuice.price,
-                priceTotal: isJuice.priceTotal + isJuice.price,
-                //quant: isJuice.quant + 1,
-            }
+            setJuices(prevJuices => prevJuices.map(j => {
+                if (j.id === juice.id){
+                    j.id = juice.id;
+                    j.image = isJuice.image;
+                    j.name = isJuice.name,
+                    j.details = isJuice.details,
+                    j.price = isJuice.price,
+                    j.priceTotal = Number(isJuice.priceTotal) + Number(isJuice.price),
+                    j.quant= isJuice.quant! + 1;
+                }
+                return j;
+            }));
 
         }else{
             const newJuice = {
@@ -79,24 +87,18 @@ function CartProvider ({children}:CartProviderProps){
         }
     }
 
-    function plusJuices(data:JuiceProps){
-        
-        if( data.quant !== undefined && data.quant > 0){
-            const newJuices = juices.map(j => {
+    function modifiesJuices(data:JuiceProps){
+        if( data.quant !== undefined && data.quant <= 0 ){      
+
+            setJuices(prevJuices => prevJuices.filter(j=>j.id !== data.id))
+      
+        }else if( data.quant !== undefined && data.quant >= 1){  
+            setJuices(prevJuices => prevJuices.map(j => {
                 if (j.id === data.id){
                     j = data;
                 }
                 return j;
-            });
-            setJuices(newJuices);
-        }else if( data.quant !== undefined && data.quant === 0 ){
-            console.log('antes de apagar', data)
-            const indice = juices.findIndex(i => i.id === data.id);
-            const j = juices;
-            j.splice(indice, 1);
-            console.log('depois de apagar', j)
-            setJuices(j); 
-            console.log('tsejhh', juices)
+            }));
         }
     }
 
@@ -108,9 +110,27 @@ function CartProvider ({children}:CartProviderProps){
         setTotal(newTotalJuices);
     }
 
+    function newRequestJuice(){
+
+        const newRequest = {
+            id: uuidv4(),
+            juices,
+            user
+        }
+        try{
+            api.post('/juices_cart', newRequest);
+            setJuices([]);
+            setTotal(0);
+            Alert.alert('Eeeeeba! :)','Seu pedido foi enviada com sucesso!!');
+        }catch(err){
+            Alert.alert('Opss!','Ocorreu um problema e não foi possível enviar o seu pedido :( !!');
+        }
+    }
+
     useEffect(()=>{
         getTotal();
     },[juices]);
+    
 
     return (
         <CartContext.Provider value={{
@@ -118,7 +138,8 @@ function CartProvider ({children}:CartProviderProps){
             juices,
             total,
             addNewJuice,
-            plusJuices
+            modifiesJuices,
+            newRequestJuice
         }}>
             {children}
         </CartContext.Provider>
