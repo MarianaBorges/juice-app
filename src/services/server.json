@@ -163,6 +163,25 @@
         "name": "Maria da Silva",
         "email": "mariasilva@gmail.com"
       }
+    },
+    {
+      "id": "e2d1d6b7-7efa-4152-85e5-752b6f5c8e09",
+      "juices": [
+        {
+          "id": "2",
+          "image": "https://app-23495.nuvem-brasil-10.absamcloud.com/pessego%20n.png-1594172732260.png",
+          "name": "Juice Two",
+          "details": "made with fruits and a lot of love",
+          "price": "9.50",
+          "priceTotal": "9.50",
+          "quant": 1
+        }
+      ],
+      "user": {
+        "id": "1",
+        "name": "Maria da Silva",
+        "email": "mariasilva@gmail.com"
+      }
     }
   ]
 }

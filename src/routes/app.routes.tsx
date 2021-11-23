@@ -56,7 +56,7 @@ export function AppRoutes(){
                     tabBarIcon: (({size, color})=>(
                         <AntDesign 
                             name="pluscircle" 
-                            size={size+2} 
+                            size={size+4} 
                             color={theme.colors.pinkCardOne} 
                         />
                     ))

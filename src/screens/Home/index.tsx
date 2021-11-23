@@ -9,7 +9,9 @@ import {
     Header,
     Flavors,
     Juices,
-    IndicatorContainer
+    IndicatorContainer,
+    ButtonTryAgain,
+    TextButtonTryAgain
 } from './styles';
 
 import { Background } from '../../components/Background'
@@ -88,9 +90,13 @@ export function Home(){
         }
     }
 
-    useEffect(()=>{
+    function handleTryAgain (){
         fechFlavors();
         fechMostPopularJuices();
+    }
+
+    useEffect(()=>{
+        handleTryAgain();
     },[]);
 
    return (
@@ -109,36 +115,44 @@ export function Home(){
                         />
                     </IndicatorContainer>
                 :
-                <Container>
-                    <Header>
-                        <Logo/>
-                        <User source='https://i.pinimg.com/236x/65/ec/30/65ec30b84a0bcb0a64254396fd822cd0--eyes-hair.jpg'/>
-                    </Header>
-                    <Flavors
-                        data={flavors}
-                        keyExtractor={item => String(item.id)}
-                        renderItem={
-                            ({item})=><ItemTaste 
-                                    name={item.name}
-                                    icon={getAccessoryIcon(item.name)} 
-                                    color={theme.colors.candyRed}
-                                    onPress={()=>fechJuices(item.id)}
-                                />}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                    />
+                    flavors.length > 0 && juices.length > 0 ?
+                        <Container>
+                            <Header>
+                                <Logo/>
+                                <User source='https://i.pinimg.com/236x/65/ec/30/65ec30b84a0bcb0a64254396fd822cd0--eyes-hair.jpg'/>
+                            </Header>
+                            <Flavors
+                                data={flavors}
+                                keyExtractor={item => String(item.id)}
+                                renderItem={
+                                    ({item})=><ItemTaste 
+                                            name={item.name}
+                                            icon={getAccessoryIcon(item.name)} 
+                                            color={theme.colors.candyRed}
+                                            onPress={()=>fechJuices(item.id)}
+                                        />}
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                            />
 
-                    <Title>Most Popular</Title>
-                    <Juices
-                        data={juices}
-                        keyExtractor={item => String(item.id)}
-                        renderItem={
-                            ({item}) => <Card data={item}/>}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false} 
-                    />
-                </Container>
-                
+                            <Title>Most Popular</Title>
+                            <Juices
+                                data={juices}
+                                keyExtractor={item => String(item.id)}
+                                renderItem={
+                                    ({item}) => <Card data={item}/>}
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false} 
+                            />
+                        </Container>
+                    :
+                    <IndicatorContainer>
+                        <ButtonTryAgain onPress={()=>handleTryAgain()}>
+                            <TextButtonTryAgain>
+                                Tentar novamente
+                            </TextButtonTryAgain>
+                        </ButtonTryAgain>
+                    </IndicatorContainer>
             }
             
         </Background>

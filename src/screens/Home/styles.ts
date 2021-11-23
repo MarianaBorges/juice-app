@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
 
 interface FlavorsProps{
     id: string;
@@ -49,4 +50,14 @@ export const IndicatorContainer = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
+`;
+
+export const ButtonTryAgain = styled(RectButton)`
+    padding: 10px;
+`;
+
+export const TextButtonTryAgain = styled.Text`
+    font-size: 14px;
+    font-family: ${({theme}) => theme.fonts.semiBold};
+    color: ${({theme}) => theme.colors.write};
 `;
