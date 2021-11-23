@@ -2,7 +2,6 @@
 App de venda de suco, feito com base nesse [design](https://dribbble.com/shots/10274668-Juiceup-App)
 
 <p>
-  <img src="assets/screen1.png" alt="Image" width="240" height="494" style="display: block; margin: 0 auto" />
   <img src="assets/screen2.png" alt="Image" width="240" height="494" style="display: block; margin: 0 auto" />
   <img src="assets/screen3.png" alt="Image" width="240" height="494" style="display: block; margin: 0 auto" />
   <img src="assets/screen4.png" alt="Image" width="240" height="494" style="display: block; margin: 0 auto" />
